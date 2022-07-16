@@ -69,7 +69,7 @@ func enemy_turn():
 	
 	var damage = random.randi_range(5, 15)
 	
-	display_text("ouch! " + str(damage) + " oof")
+	display_text("Ouch! The bug punched you for " + str(damage) + " damage.")
 	current_player_health = max(0, current_player_health - damage)
 	set_health($PlayerPanel/HP, current_player_health, State.max_health)
 	yield(self, "textbox_closed")
@@ -78,10 +78,11 @@ func enemy_turn():
 		yield(get_tree().create_timer(0.25), "timeout")
 		load_main()
 	
-	if current_player_magic < 20:
-		current_player_magic = max(0, current_player_magic + 5)
+	if current_player_magic < 10:
+		var magicback = random.randi_range(0, 5)
+		current_player_magic = max(0, current_player_magic + magicback)
 		set_magic($PlayerPanel/MP, State.current_magic, State.max_magic)
-		display_text("You gain 5 Magic Points back!")
+		display_text("You gain " + str(magicback) +" Magic Points back!")
 		yield(self, "textbox_closed")
 
 	$ActionPanel.show()
@@ -117,7 +118,7 @@ func _on_Cast_Spell_pressed():
 		var damage = random.randi_range(1, 30)
 		enemyhealth -= damage
 		set_health($EnemyPanel/HP, enemyhealth, enemymax_health)
-		current_player_magic = max(0, current_player_magic - 10)
+		current_player_magic = max(0, current_player_magic - 6)
 		set_magic($PlayerPanel/MP, State.current_magic, State.max_magic)
 		
 		if enemyhealth <= 0:
@@ -128,16 +129,13 @@ func _on_Cast_Spell_pressed():
 			
 		
 		if damage == 1:
-			display_text("1 " + str(damage) + " damage!")
+			display_text("You only hit the bug for 1 HP! \n Whoops...")
 			yield(self, "textbox_closed")
-		elif damage >= 2 and damage <= 14:
-			display_text("14" + str(damage) + " damage!")
-			yield(self, "textbox_closed")
-		elif damage >= 15 and damage <= 29:
-			display_text("29" + str(damage) + " damage!")
+		elif damage >= 2 and damage <= 29:
+			display_text("The bug takes " + str(damage) + " damage!")
 			yield(self, "textbox_closed")
 		else:
-			display_text("14" + str(damage) + " damage!")
+			display_text("Wow! You hit the bug for 30 damage!!")
 			yield(self, "textbox_closed")
 			
 		enemy_turn()
