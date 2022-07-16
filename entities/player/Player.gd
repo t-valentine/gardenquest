@@ -79,6 +79,7 @@ func _input(event):
 				# Talk to NPC
 				target.talk()
 				return
+				
 func from_dictionary(data):
 	position = Vector2(data.position[0], data.position[1])
 		

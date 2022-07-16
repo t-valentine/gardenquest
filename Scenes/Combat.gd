@@ -34,11 +34,16 @@ func _ready():
 	$ActionPanel.show()
 	
 func load_main():
-	var next_level_resource = load("res://Scenes/Main.tscn");
-	var next_level = next_level_resource.instance()
-	next_level.load_saved_game = true
-	get_tree().root.call_deferred("add_child", next_level)
-	get_tree().reload_scene()
+	yield(get_tree().create_timer(0.25), "timeout")
+	if current_player_health > 0:
+		var next_level_resource = load("res://Scenes/Main.tscn");
+		var next_level = next_level_resource.instance()
+		next_level.load_saved_game = true
+		get_tree().root.call_deferred("add_child", next_level)
+		queue_free()
+	else:
+		get_tree().change_scene("res://Scenes/GameOver.tscn")
+		queue_free()
 	
 	#yield(get_tree().create_timer(0.1), "timeout")
 	#get_node("/root/Combat").free()
@@ -149,6 +154,6 @@ func _on_Run_pressed():
 		load_main()
 	# delete bug from main
 	else:
-		display_text("Haha no")
+		display_text("You weren't able to get away!")
 		yield(self, "textbox_closed")
 		enemy_turn()
