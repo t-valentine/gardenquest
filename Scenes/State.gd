@@ -3,7 +3,6 @@ extends Node
 
 var current_health = 35
 var max_health = 35
-var scratch = 10
 var current_magic = 10
 var max_magic = 10
 

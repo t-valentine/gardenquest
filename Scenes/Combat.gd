@@ -86,7 +86,7 @@ func enemy_turn():
 	if current_player_magic < 10:
 		var magicback = random.randi_range(0, 5)
 		current_player_magic = max(0, current_player_magic + magicback)
-		set_magic($PlayerPanel/MP, State.current_magic, State.max_magic)
+		set_magic($PlayerPanel/MP, current_player_magic, State.max_magic)
 		display_text("You gain " + str(magicback) +" Magic Points back!")
 		yield(self, "textbox_closed")
 
@@ -152,7 +152,6 @@ func _on_Run_pressed():
 		yield(self, "textbox_closed")
 		yield(get_tree().create_timer(0.1), "timeout")
 		load_main()
-	# delete bug from main
 	else:
 		display_text("You weren't able to get away!")
 		yield(self, "textbox_closed")
