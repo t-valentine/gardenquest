@@ -1,0 +1,66 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://entities/enemies/yellow/up_idle2.png" type="Texture" id=1]
+[ext_resource path="res://entities/enemies/yellow/down_walk2.png" type="Texture" id=2]
+[ext_resource path="res://entities/enemies/yellow/down_walk1.png" type="Texture" id=3]
+[ext_resource path="res://entities/enemies/yellow/down_idle1.png" type="Texture" id=4]
+[ext_resource path="res://entities/enemies/yellow/up_walk1.png" type="Texture" id=5]
+[ext_resource path="res://entities/enemies/yellow/down_idle2.png" type="Texture" id=6]
+[ext_resource path="res://entities/enemies/yellow/up_idle1.png" type="Texture" id=7]
+[ext_resource path="res://entities/enemies/yellow/up_walk2.png" type="Texture" id=8]
+[ext_resource path="res://entities/enemies/Bugs.gd" type="Script" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "up_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "up_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "down_walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "down_idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 16 )
+
+[node name="Bugs" type="KinematicBody2D"]
+script = ExtResource( 9 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "down_walk"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 5.72205e-06, 1.90735e-06 )
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -5.72205e-06, -1.90735e-06 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 5.72205e-06, 1.90735e-06 )
+shape = SubResource( 3 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
