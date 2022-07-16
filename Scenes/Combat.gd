@@ -15,6 +15,7 @@ var current_enemy_health = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	random.randomize()
 	
 	enemyhealth = 40
 	enemymax_health = 40
@@ -65,6 +66,7 @@ func display_text(text):
 	$TextBox/Label.text = text
 	
 func enemy_turn():
+	
 	var damage = random.randi_range(5, 15)
 	
 	display_text("ouch! " + str(damage) + " oof")
@@ -87,6 +89,7 @@ func enemy_turn():
 func _on_Scratch_pressed():
 	display_text("You reach out with your claws to scratch \nat the bug!")
 	yield(self, "textbox_closed")
+
 	var damage = random.randi_range(5, 15)
 	enemyhealth -= damage
 	set_health($EnemyPanel/HP, enemyhealth, enemymax_health)
@@ -110,6 +113,7 @@ func _on_Cast_Spell_pressed():
 		yield(self, "textbox_closed")
 		enemy_turn()
 	else:
+
 		var damage = random.randi_range(1, 30)
 		enemyhealth -= damage
 		set_health($EnemyPanel/HP, enemyhealth, enemymax_health)
