@@ -225,11 +225,11 @@ text = "Quit"
 align = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -104, -336 )
+position = Vector2( 24, 8 )
 z_index = 2
 
 [node name="Fairymom" parent="." instance=ExtResource( 4 )]
-position = Vector2( 136, -224 )
+position = Vector2( 208, 80 )
 
 [node name="Worm" parent="." instance=ExtResource( 9 )]
 position = Vector2( 496, -144 )

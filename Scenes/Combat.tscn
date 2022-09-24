@@ -74,6 +74,7 @@ frames = ExtResource( 2 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
 position = Vector2( 120, 168 )
 shape = SubResource( 1 )
 
@@ -112,6 +113,7 @@ frames = SubResource( 2 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VBoxContainer/Enemy"]
+visible = false
 position = Vector2( 352, 152 )
 shape = SubResource( 3 )
 
